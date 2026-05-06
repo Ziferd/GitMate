@@ -167,10 +167,10 @@ Feature gh CLI
 -   Contribution stats ❌
 -   SSH key generator ❌
 -   Bilingual (EN/ID) ❌
--   Gist / Issue / PR / Release / Actions ❌
+-   Gist / Issue / PR / Release / Actions ✅
 -   Repo create / Clone ✅
 
-Total: 35+ features — more than gh while staying lightweight.
+Total: 35+ features GitMate v.4.0 — more than gh while staying lightweight.
 
 ---
 
