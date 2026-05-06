@@ -146,17 +146,29 @@ GITHUB_USER Your GitHub username (speeds up clone) (none)
 
 🆚 Comparison with gh CLI
 
-Feature GitMate v4.0 gh CLI
--   One-command deploy ✅ ❌
--   Backup all repos ✅ ❌
--   Undo (commit/file/hard) ✅ ❌
--   Squash, Rebase, Cherry-pick, Bisect, Reflog ✅ ❌
--   Auto-sync (daemon) ✅ ❌
--   Contribution stats ✅ ❌
--   SSH key generator ✅ ❌
--   Bilingual (EN/ID) ✅ ❌
--   Gist / Issue / PR / Release / Actions ✅ ✅
--   Repo create / Clone ✅ ✅
+Feature GitMate v4.0
+-   One-command deploy ✅ 
+-   Backup all repos ✅ 
+-   Undo (commit/file/hard) ✅ 
+-   Squash, Rebase, Cherry-pick, Bisect, Reflog ✅ 
+-   Auto-sync (daemon) ✅ 
+-   Contribution stats ✅ 
+-   SSH key generator ✅ 
+-   Bilingual (EN/ID) ✅ 
+-   Gist / Issue / PR / Release / Actions ✅ 
+-   Repo create / Clone ✅
+---
+Feature gh CLI
+-   One-command deploy ❌
+-   Backup all repos ❌
+-   Undo (commit/file/hard) ❌
+-   Squash, Rebase, Cherry-pick, Bisect, Reflog ❌
+-   Auto-sync (daemon) ❌
+-   Contribution stats ❌
+-   SSH key generator ❌
+-   Bilingual (EN/ID) ❌
+-   Gist / Issue / PR / Release / Actions ❌
+-   Repo create / Clone ✅
 
 Total: 35+ features — more than gh while staying lightweight.
 
