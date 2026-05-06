@@ -45,12 +45,12 @@ gitmate setup
 
 📋 Features Overview
 
-· Core Git: deploy, push, pull, sync, status, log, diff, stash, tag, remote, init
-· Branch & Merge: branch (create/switch/delete/rename), merge, fetch
-· Rewrite History: reset (soft/hard), squash, rebase, cherry-pick, bisect
-· GitHub API: repo (create), clone, gist, issue, pr, release, actions
-· Automation: backup (all repos), stats, daemon (auto-sync), webhook
-· Setup & Config: setup, config (git settings), undo, keygen, help
+-   Core Git: deploy, push, pull, sync, status, log, diff, stash, tag, remote, init
+-   Branch & Merge: branch (create/switch/delete/rename), merge, fetch
+-   write History: reset (soft/hard), squash, rebase, cherry-pick, bisect
+-   Github API: repo (create), clone, gist, issue, pr, release, actions
+-   Automation: backup (all repos), stats, daemon (auto-sync), webhook
+-   Setup & Config: setup, config (git settings), undo, keygen, help
 
 ---
 
