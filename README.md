@@ -30,13 +30,13 @@ Just `gitmate deploy "fix: login bug"` and you're done.
 One command, and you're ready to go:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/Ziferd/gitmate/main/gitmate -o $PREFIX/bin/gitmate && chmod +x $PREFIX/bin/gitmate
+curl -sL https://raw.githubusercontent.com/Ziferd/GitMate/main/GitMate -o $PREFIX/bin/GitMate && chmod +x $PREFIX/bin/gitmate
 ```
 
 Then install the dependencies:
 
 ```bash
-gitmate setup
+GitMate setup
 ```
 
 🎉 Done. Type gitmate help to see all available commands.
