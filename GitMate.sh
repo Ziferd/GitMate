@@ -581,10 +581,10 @@ cmd_setup() {
 cmd_help() {
     echo ""
     echo "┌──────────────────────────────────────────────────────────────┐"
-    echo "│                    🛠️  GitMate v4.0                          │"
+    echo "│                    🛠️  GitMate v4.0                           │"
     echo "│               Developer By: Ziferd                           │"
     echo "├──────────────────────────────────────────────────────────────┤"
-    [ "$GITMATE_LANG" = "id" ] && echo "│  gitmate deploy  \"pesan\" [branch]     add+commit+push+sync   │" || echo "│  gitmate deploy  \"msg\" [branch]       add+commit+push+sync     │"
+    [ "$GITMATE_LANG" = "id" ] && echo "│  gitmate deploy  \"pesan\" [branch]     add+commit+push+sync   │" || echo "│  gitmate deploy  \"msg\" [branch]       add+commit+push+sync      │"
     [ "$GITMATE_LANG" = "id" ] && echo "│  gitmate push    [branch]             push ke remote           │" || echo "│  gitmate push    [branch]             push to remote             │"
     [ "$GITMATE_LANG" = "id" ] && echo "│  gitmate pull    [branch]             pull dari remote         │" || echo "│  gitmate pull    [branch]             pull from remote           │"
     [ "$GITMATE_LANG" = "id" ] && echo "│  gitmate sync    [branch]             pull lalu push           │" || echo "│  gitmate sync    [branch]             pull then push             │"
