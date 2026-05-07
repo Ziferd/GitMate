@@ -1,326 +1,384 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gitzen v4.0 — GitHub CLI Assistant for Termux</title>
-    <style>
-        :root {
-            --bg: #0d1117;
-            --card: #161b22;
-            --border: #30363d;
-            --text: #c9d1d9;
-            --text-secondary: #8b949e;
-            --accent: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-orange: #d2991d;
-            --accent-red: #f85149;
-            --code-bg: #0d1117;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+<title>Gitzen v4.0 — GitHub CLI Assistant</title>
 
-        /* ── Header ───────────────────── */
-        .header {
-            background: var(--card);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+<!-- PRIMARY META -->
+<meta name="title" content="Gitzen v4.0 — GitHub CLI Assistant">
+<meta name="description"
+content="Powerful GitHub CLI Assistant for Termux &amp; Linux — 35+ Git &amp; GitHub operations in one modern CLI">
 
-        .header .logo {
-            font-size: 1.4em;
-            font-weight: 700;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+<!-- OPEN GRAPH / UNIVERSAL -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gitzen.vercel.app/">
 
-        .header .logo span {
-            background: var(--accent);
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.65em;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+<meta property="og:title"
+content="Gitzen v4.0 — GitHub CLI Assistant for Termux">
 
-        .header .links {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+<meta property="og:description"
+content="35+ GitHub operations in one modern CLI. Deploy, backup, and manage repos with a single command.">
 
-        .header .links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: color 0.2s;
-        }
+<meta property="og:image"
+content="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/banner.png">
 
-        .header .links a:hover {
-            color: var(--accent);
-        }
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
 
-        /* ── Hero ───────────────────── */
-        .hero {
-            text-align: center;
-            padding: 60px 24px 40px;
-        }
+<meta property="og:image:type" content="image/png">
 
+<meta property="og:site_name"
+content="Gitzen">
+
+<meta property="og:locale"
+content="en_US">
+
+<!-- TWITTER -->
+<meta name="twitter:card"
+content="summary_large_image">
+
+<meta name="twitter:url"
+content="https://gitzen.vercel.app/">
+
+<meta name="twitter:title"
+content="Gitzen v4.0 — GitHub CLI Assistant">
+
+<meta name="twitter:description"
+content="Modern GitHub CLI Assistant for Termux &amp; Linux. Deploy, backup, and manage repos with 35+ features.">
+
+<meta name="twitter:image"
+content="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/banner.png">
+
+<!-- DISCORD EMBED COLOR -->
+<meta name="theme-color" content="#3fb950">
+
+<!-- FAVICON -->
+<link rel="icon"
+href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
+
+<style>
+    :root {
+        --bg: #0d1117;
+        --card: #161b22;
+        --border: #30363d;
+        --text: #c9d1d9;
+        --text-secondary: #8b949e;
+        --accent: #58a6ff;
+        --accent-green: #3fb950;
+        --accent-orange: #d2991d;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    /* ── Header ───────────────────── */
+    .header {
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .header .logo {
+        font-size: 1.4em;
+        font-weight: 700;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .header .logo span {
+        background: var(--accent);
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 0.65em;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .header .links {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .header .links a {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9em;
+        transition: color 0.2s;
+    }
+
+    .header .links a:hover {
+        color: var(--accent);
+    }
+
+    /* ── Hero ───────────────────── */
+    .hero {
+        text-align: center;
+        padding: 60px 24px 40px;
+    }
+
+    .hero h1 {
+        font-size: 2.6em;
+        font-weight: 800;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .hero h1 .git {
+        color: var(--accent-orange);
+    }
+
+    .hero h1 .zen {
+        color: var(--accent);
+    }
+
+    .hero .tagline {
+        font-size: 1.15em;
+        color: var(--text-secondary);
+        margin-bottom: 28px;
+    }
+
+    .hero .cta {
+        display: inline-flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 22px;
+        border-radius: 8px;
+        font-size: 0.95em;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+        background: var(--accent-green);
+        color: #fff;
+        border-color: var(--accent-green);
+    }
+
+    .btn-primary:hover {
+        background: #2ea043;
+    }
+
+    .btn-secondary {
+        background: var(--card);
+        color: var(--text);
+    }
+
+    .btn-secondary:hover {
+        background: #1f2937;
+        border-color: var(--accent);
+    }
+
+    /* ── Terminal Preview ───────────────────── */
+    .terminal-preview {
+        max-width: 720px;
+        margin: 0 auto 40px;
+        background: #0d1117;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .terminal-preview .titlebar {
+        background: #161b22;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-preview .titlebar .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+    }
+
+    .dot.red {
+        background: #f85149;
+    }
+
+    .dot.yellow {
+        background: #d2991d;
+    }
+
+    .dot.green {
+        background: #3fb950;
+    }
+
+    .terminal-preview .body {
+        padding: 16px 20px;
+        font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+        font-size: 0.82em;
+        line-height: 1.7;
+        overflow-x: auto;
+        color: #c9d1d9;
+    }
+
+    .terminal-preview .body .prompt {
+        color: var(--accent-green);
+    }
+
+    .terminal-preview .body .cmd {
+        color: var(--accent);
+    }
+
+    .terminal-preview .body .arg {
+        color: var(--accent-orange);
+    }
+
+    .terminal-preview .body .output {
+        color: var(--text-secondary);
+        margin-top: 8px;
+        padding-left: 12px;
+        border-left: 2px solid var(--border);
+    }
+
+    /* ── Features Grid ───────────────────── */
+    .features {
+        max-width: 900px;
+        margin: 0 auto 50px;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+    }
+
+    .feature-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px;
+        transition: border-color 0.2s;
+    }
+
+    .feature-card:hover {
+        border-color: var(--accent);
+    }
+
+    .feature-card .icon {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+
+    .feature-card h3 {
+        font-size: 1em;
+        margin-bottom: 6px;
+    }
+
+    .feature-card p {
+        font-size: 0.85em;
+        color: var(--text-secondary);
+    }
+
+    /* ── Quick Install ───────────────────── */
+    .install-section {
+        max-width: 720px;
+        margin: 0 auto 50px;
+        padding: 0 24px;
+        text-align: center;
+    }
+
+    .install-section h2 {
+        font-size: 1.5em;
+        margin-bottom: 16px;
+    }
+
+    .install-section .code-block {
+        background: #0d1117;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 14px 18px;
+        font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+        font-size: 0.82em;
+        overflow-x: auto;
+        text-align: left;
+        color: var(--accent);
+        position: relative;
+    }
+
+    .install-section .code-block .copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.75em;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .install-section .code-block .copy-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    /* ── Footer ───────────────────── */
+    .footer {
+        text-align: center;
+        padding: 30px 24px;
+        border-top: 1px solid var(--border);
+        color: var(--text-secondary);
+        font-size: 0.82em;
+    }
+
+    .footer a {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* ── Responsive ───────────────────── */
+    @media (max-width: 600px) {
         .hero h1 {
-            font-size: 2.6em;
-            font-weight: 800;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero h1 .git {
-            color: var(--accent-orange);
-        }
-        .hero h1 .zen {
-            color: var(--accent);
-        }
-
-        .hero .tagline {
-            font-size: 1.15em;
-            color: var(--text-secondary);
-            margin-bottom: 28px;
-        }
-
-        .hero .cta {
-            display: inline-flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 11px 22px;
-            border-radius: 8px;
-            font-size: 0.95em;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid var(--border);
-        }
-
-        .btn-primary {
-            background: var(--accent-green);
-            color: #fff;
-            border-color: var(--accent-green);
-        }
-
-        .btn-primary:hover {
-            background: #2ea043;
-        }
-
-        .btn-secondary {
-            background: var(--card);
-            color: var(--text);
-        }
-
-        .btn-secondary:hover {
-            background: #1f2937;
-            border-color: var(--accent);
-        }
-
-        /* ── Terminal Preview ───────────────────── */
-        .terminal-preview {
-            max-width: 720px;
-            margin: 0 auto 40px;
-            background: #0d1117;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .terminal-preview .titlebar {
-            background: #161b22;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .terminal-preview .titlebar .dot {
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-        }
-
-        .dot.red {
-            background: #f85149;
-        }
-        .dot.yellow {
-            background: #d2991d;
-        }
-        .dot.green {
-            background: #3fb950;
+            font-size: 1.8em;
         }
 
         .terminal-preview .body {
-            padding: 16px 20px;
-            font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
-            font-size: 0.82em;
-            line-height: 1.7;
-            overflow-x: auto;
-            color: #c9d1d9;
+            font-size: 0.7em;
+            padding: 12px 14px;
         }
-
-        .terminal-preview .body .prompt {
-            color: var(--accent-green);
-        }
-        .terminal-preview .body .cmd {
-            color: var(--accent);
-        }
-        .terminal-preview .body .arg {
-            color: var(--accent-orange);
-        }
-
-        .terminal-preview .body .output {
-            color: var(--text-secondary);
-            margin-top: 8px;
-            padding-left: 12px;
-            border-left: 2px solid var(--border);
-        }
-
-        /* ── Features Grid ───────────────────── */
-        .features {
-            max-width: 900px;
-            margin: 0 auto 50px;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-        }
-
-        .feature-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
-            transition: border-color 0.2s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--accent);
-        }
-
-        .feature-card .icon {
-            font-size: 1.6em;
-            margin-bottom: 10px;
-        }
-
-        .feature-card h3 {
-            font-size: 1em;
-            margin-bottom: 6px;
-        }
-
-        .feature-card p {
-            font-size: 0.85em;
-            color: var(--text-secondary);
-        }
-
-        /* ── Quick Install ───────────────────── */
-        .install-section {
-            max-width: 720px;
-            margin: 0 auto 50px;
-            padding: 0 24px;
-            text-align: center;
-        }
-
-        .install-section h2 {
-            font-size: 1.5em;
-            margin-bottom: 16px;
-        }
-
-        .install-section .code-block {
-            background: var(--code-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 14px 18px;
-            font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
-            font-size: 0.82em;
-            overflow-x: auto;
-            text-align: left;
-            color: var(--accent);
-            position: relative;
-        }
-
-        .install-section .code-block .copy-btn {
-            position: absolute;
-            top: 8px;
-            right: 10px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .install-section .code-block .copy-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* ── Footer ───────────────────── */
-        .footer {
-            text-align: center;
-            padding: 30px 24px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 0.82em;
-        }
-
-        .footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* ── Responsive ───────────────────── */
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 1.8em;
-            }
-
-            .terminal-preview .body {
-                font-size: 0.7em;
-                padding: 12px 14px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
 
