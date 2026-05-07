@@ -1,337 +1,457 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gitzen v4.0 — GitHub CLI Assistant for Termux</title>
     <style>
         :root {
-            --bg: #0a0a0f;
-            --card: #111118;
-            --border: #2a2a3a;
-            --accent: #6c5ce7;
-            --text: #c0c0c0;
-            --heading: #e0e0e0;
-            --code-bg: #1a1a25;
-            --green: #51cf66;
-            --yellow: #fcc419;
-            --red: #ff6b6b;
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-orange: #d2991d;
+            --accent-red: #f85149;
+            --code-bg: #0d1117;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            padding: 20px;
+            min-height: 100vh;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        /* Hero Section */
-        .hero {
+
+        /* ── Header ───────────────────── */
+        .header {
             background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px 30px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .hero .terminal-header {
-            display: inline-block;
-            background: #0f0f15;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 15px 25px;
-            margin-bottom: 20px;
-            font-family: 'Courier New', monospace;
-            color: var(--accent);
-        }
-        .hero .terminal-header .line {
-            display: block;
-            text-align: left;
-        }
-        .hero h1 {
-            font-size: 2.2em;
-            color: var(--accent);
-            margin: 15px 0 5px;
-            font-weight: 700;
-        }
-        .hero .tagline {
-            color: #888;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-        .hero .developer {
-            color: var(--yellow);
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-        .badge-container {
-            margin: 20px 0;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
             display: flex;
-            justify-content: center;
-            gap: 8px;
+            align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
+            gap: 12px;
         }
-        .badge {
-            background: var(--code-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 5px 14px;
-            font-size: 0.8em;
-            color: var(--text);
-        }
-        .badge.accent { border-color: var(--accent); color: var(--accent); }
-        
-        /* Section */
-        .section {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            color: var(--accent);
-            margin-bottom: 15px;
+
+        .header .logo {
             font-size: 1.4em;
+            font-weight: 700;
+            color: var(--accent);
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .section h3 {
-            color: var(--heading);
-            margin: 20px 0 10px;
-            font-size: 1.1em;
-        }
-        .section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .section ul li {
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-        .section ul li:last-child { border-bottom: none; }
-        .section ul li::before {
-            content: "•";
-            color: var(--accent);
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        /* Code Block */
-        code {
-            background: var(--code-bg);
+
+        .header .logo span {
+            background: var(--accent);
+            color: #fff;
             padding: 2px 8px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            border-radius: 6px;
+            font-size: 0.65em;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header .links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .header .links a {
+            color: var(--text);
+            text-decoration: none;
             font-size: 0.9em;
-            color: var(--green);
+            transition: color 0.2s;
+        }
+
+        .header .links a:hover {
+            color: var(--accent);
+        }
+
+        /* ── Hero ───────────────────── */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.6em;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 .git {
+            color: var(--accent-orange);
+        }
+        .hero h1 .zen {
+            color: var(--accent);
+        }
+
+        .hero .tagline {
+            font-size: 1.15em;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+
+        .hero .cta {
+            display: inline-flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
             border: 1px solid var(--border);
         }
-        pre {
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: #fff;
+            border-color: var(--accent-green);
+        }
+
+        .btn-primary:hover {
+            background: #2ea043;
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: #1f2937;
+            border-color: var(--accent);
+        }
+
+        /* ── Terminal Preview ───────────────────── */
+        .terminal-preview {
+            max-width: 720px;
+            margin: 0 auto 40px;
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .terminal-preview .titlebar {
+            background: #161b22;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-preview .titlebar .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .dot.red {
+            background: #f85149;
+        }
+        .dot.yellow {
+            background: #d2991d;
+        }
+        .dot.green {
+            background: #3fb950;
+        }
+
+        .terminal-preview .body {
+            padding: 16px 20px;
+            font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.82em;
+            line-height: 1.7;
+            overflow-x: auto;
+            color: #c9d1d9;
+        }
+
+        .terminal-preview .body .prompt {
+            color: var(--accent-green);
+        }
+        .terminal-preview .body .cmd {
+            color: var(--accent);
+        }
+        .terminal-preview .body .arg {
+            color: var(--accent-orange);
+        }
+
+        .terminal-preview .body .output {
+            color: var(--text-secondary);
+            margin-top: 8px;
+            padding-left: 12px;
+            border-left: 2px solid var(--border);
+        }
+
+        /* ── Features Grid ───────────────────── */
+        .features {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+        }
+
+        .feature-card .icon {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+
+        .feature-card h3 {
+            font-size: 1em;
+            margin-bottom: 6px;
+        }
+
+        .feature-card p {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+
+        /* ── Quick Install ───────────────────── */
+        .install-section {
+            max-width: 720px;
+            margin: 0 auto 50px;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .install-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 16px;
+        }
+
+        .install-section .code-block {
             background: var(--code-bg);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 15px 20px;
+            padding: 14px 18px;
+            font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.82em;
             overflow-x: auto;
-            margin: 10px 0;
-        }
-        pre code {
-            background: none;
-            padding: 0;
-            border: none;
-            color: var(--green);
-        }
-        
-        /* Comparison Table */
-        .compare-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        .compare-table th, .compare-table td {
-            padding: 10px 15px;
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            color: var(--accent);
+            position: relative;
         }
-        .compare-table th {
-            color: var(--heading);
-            font-weight: 600;
+
+        .install-section .code-block .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .compare-table .check { color: var(--green); font-weight: bold; }
-        .compare-table .cross { color: var(--red); }
-        
-        /* Footer */
+
+        .install-section .code-block .copy-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── Footer ───────────────────── */
         .footer {
             text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.85em;
+            padding: 30px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.82em;
         }
+
         .footer a {
             color: var(--accent);
             text-decoration: none;
         }
-        .footer a:hover { text-decoration: underline; }
-        
-        /* Responsive */
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Responsive ───────────────────── */
         @media (max-width: 600px) {
-            .hero { padding: 25px 15px; }
-            .hero h1 { font-size: 1.6em; }
-            .section { padding: 20px 15px; }
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .terminal-preview .body {
+                font-size: 0.7em;
+                padding: 12px 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        
-        <!-- Hero -->
-        <div class="hero">
-            <div class="terminal-header">
-                <span class="line">╔═══════════【★】「 GITZEN v4.0 」【★】</span>
-                <span class="line">║ GitHub CLI Assistant for Termux</span>
-                <span class="line">║ Developer By: Ziferd</span>
-                <span class="line">╚═══════════【★】</span>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            ⎔ Gitzen <span>v4.0</span>
+        </div>
+        <nav class="links">
+            <a href="https://github.com/Ziferd/Gitzen" target="_blank">GitHub</a>
+            <a href="https://github.com/Ziferd/Gitzen#readme" target="_blank">Dokumentasi</a>
+            <a href="https://github.com/Ziferd/Gitzen/releases" target="_blank">Releases</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>
+            <span class="git">Git</span><span class="zen">zen</span>
+        </h1>
+        <p class="tagline">GitHub CLI Assistant untuk Termux — deploy, backup, kelola repo dalam satu perintah.</p>
+        <div class="cta">
+            <a href="#install" class="btn btn-primary">⬇ Quick Install</a>
+            <a href="https://github.com/Ziferd/Gitzen" target="_blank" class="btn btn-secondary">Lihat di GitHub</a>
+        </div>
+    </section>
+
+    <!-- Terminal Preview -->
+    <div class="terminal-preview">
+        <div class="titlebar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span style="color:#8b949e;font-size:0.8em;">Termux — gitzen</span>
+        </div>
+        <div class="body">
+            <span class="prompt">~ $</span> <span class="cmd">gitzen</span> <span class="arg">deploy</span> <span class="arg">"fix: bug login"</span><br>
+            <div class="output">
+                [INFO] Deploy ke branch 'main'...<br>
+                [OK] File di-stage.<br>
+                [OK] Commit: fix: bug login<br>
+                [OK] Pull berhasil.<br>
+                [OK] Push berhasil.<br>
+                [OK] Deploy selesai.
             </div>
-            <h1>Gitzen v4.0</h1>
-            <p class="tagline">A powerful, bilingual GitHub CLI assistant built for Termux — and any Linux environment.</p>
-            <p class="developer">Developer By: Ziferd</p>
-            <div class="badge-container">
-                <span class="badge accent">v4.0.0</span>
-                <span class="badge">MIT License</span>
-                <span class="badge">Termux | Linux</span>
-                <span class="badge accent">EN | ID</span>
+            <br>
+            <span class="prompt">~ $</span> <span class="cmd">gitzen</span> <span class="arg">backup</span><br>
+            <div class="output">
+                [INFO] Mem-backup semua repo ke '/home/gitzen-backups'...<br>
+                [OK] Backup selesai.
+            </div>
+            <br>
+            <span class="prompt">~ $</span> <span class="cmd">gitzen</span> <span class="arg">help</span><br>
+            <div class="output">
+                Gitzen v4.0 — GitHub CLI Assistant for Termux<br>
+                Developer By: Ziferd<br>
+                &nbsp;<br>
+                Perintah Dasar:<br>
+                &nbsp;&nbsp;gitzen deploy  "pesan" [branch]   — Stage, commit, push<br>
+                &nbsp;&nbsp;gitzen push    [branch]           — Push ke remote<br>
+                &nbsp;&nbsp;gitzen pull    [branch]           — Pull dari remote<br>
+                &nbsp;&nbsp;...
             </div>
         </div>
-
-        <!-- Quick Install -->
-        <div class="section">
-            <h2>⚡ Quick Install</h2>
-            <p>One command, and you're ready to go:</p>
-            <pre><code>curl -sL https://raw.githubusercontent.com/Ziferd/Gitzen/main/Gitzen.sh -o $PREFIX/bin/gitzen && chmod +x $PREFIX/bin/gitzen</code></pre>
-            <p>Then install the dependencies:</p>
-            <pre><code>gitzen setup</code></pre>
-            <p>🎉 Done. Type <code>gitzen help</code> to see all available commands.</p>
-        </div>
-
-        <!-- Why Gitzen -->
-        <div class="section">
-            <h2>🤔 Why Gitzen?</h2>
-            <p>Gitzen combines <strong>35+ Git and GitHub operations</strong> into a single, easy-to-remember CLI. No more typing long <code>git</code> commands or switching between <code>git</code> and <code>gh</code>. Just <code>gitzen deploy "fix: login bug"</code> and you're done.</p>
-            <ul>
-                <li>🚀 <strong>One-command deploy</strong> — stage, commit, push, and sync in a single step.</li>
-                <li>💾 <strong>Backup all your repos</strong> — store local copies without opening a browser.</li>
-                <li>⏪ <strong>Undo anything</strong> — uncommit, restore files, or reset entirely.</li>
-                <li>🔄 <strong>Daemon mode</strong> — auto-sync your repo every N seconds.</li>
-                <li>📊 <strong>Stats</strong> — see your commit history, lines of code, and top languages.</li>
-                <li>🧩 <strong>Full GitHub API support</strong> — manage gists, issues, PRs, releases, and actions.</li>
-                <li>🌐 <strong>Bilingual</strong> — English by default, Indonesian with <code>GITZEN_LANG=id</code>.</li>
-            </ul>
-        </div>
-
-        <!-- Command Reference -->
-        <div class="section">
-            <h2>📖 Command Reference</h2>
-            
-            <h3>Core Git</h3>
-            <ul>
-                <li><code>gitzen deploy "message" [branch]</code> — Stage, commit, pull --rebase, then push.</li>
-                <li><code>gitzen push [branch]</code> — Push current branch.</li>
-                <li><code>gitzen pull [branch]</code> — Pull from remote.</li>
-                <li><code>gitzen sync [branch]</code> — Pull then push.</li>
-                <li><code>gitzen status</code> — Show working tree status.</li>
-                <li><code>gitzen log</code> — Show commit history graph.</li>
-                <li><code>gitzen diff [target]</code> — Show changes between commits.</li>
-                <li><code>gitzen stash list|save|pop|drop</code> — Temporarily stash changes.</li>
-                <li><code>gitzen tag list|create|push|delete</code> — Manage tags.</li>
-                <li><code>gitzen remote show|add|set|delete</code> — Manage remote URLs.</li>
-                <li><code>gitzen init [project]</code> — Create a new Git repo from scratch.</li>
-            </ul>
-
-            <h3>Branch & Merge</h3>
-            <ul>
-                <li><code>gitzen branch list|create|switch|delete|rename</code> — Full branch management.</li>
-                <li><code>gitzen merge &lt;branch&gt;</code> — Merge a branch into current.</li>
-                <li><code>gitzen fetch</code> — Fetch all remote metadata.</li>
-            </ul>
-
-            <h3>Rewrite History</h3>
-            <ul>
-                <li><code>gitzen reset soft|hard [target]</code> — Reset HEAD to a specific commit.</li>
-                <li><code>gitzen reflog</code> — HEAD recovery log.</li>
-                <li><code>gitzen squash [count]</code> — Squash last N commits into one.</li>
-                <li><code>gitzen rebase [branch]</code> — Rebase current onto another branch.</li>
-                <li><code>gitzen cherry-pick &lt;commit&gt;</code> — Apply a specific commit.</li>
-                <li><code>gitzen bisect start|good|bad|reset</code> — Binary search for a buggy commit.</li>
-            </ul>
-
-            <h3>GitHub API</h3>
-            <ul>
-                <li><code>gitzen repo &lt;name&gt; [visibility]</code> — Create a new GitHub repo.</li>
-                <li><code>gitzen clone &lt;user/repo&gt;</code> — Clone a GitHub repo.</li>
-                <li><code>gitzen gist list|create|edit|delete</code> — Manage GitHub Gists.</li>
-                <li><code>gitzen issue list|create|close|view</code> — Manage Issues.</li>
-                <li><code>gitzen pr list|create|merge|checkout|review</code> — Manage Pull Requests.</li>
-                <li><code>gitzen release list|create|delete</code> — Manage Releases.</li>
-                <li><code>gitzen actions list|watch|trigger</code> — Manage GitHub Actions workflows.</li>
-            </ul>
-
-            <h3>Automation</h3>
-            <ul>
-                <li><code>gitzen backup [folder]</code> — Backup all your GitHub repositories.</li>
-                <li><code>gitzen stats</code> — Show contribution statistics.</li>
-                <li><code>gitzen daemon [seconds]</code> — Auto-sync repository every N seconds.</li>
-                <li><code>gitzen webhook</code> — Test webhook notification URL.</li>
-            </ul>
-
-            <h3>Setup & Config</h3>
-            <ul>
-                <li><code>gitzen setup</code> — Install all required dependencies.</li>
-                <li><code>gitzen config show|set|remote</code> — Configure git settings.</li>
-                <li><code>gitzen undo commit|file|hard</code> — Undo changes safely.</li>
-                <li><code>gitzen keygen [email]</code> — Generate SSH key for GitHub.</li>
-                <li><code>gitzen help</code> — Show full command list.</li>
-            </ul>
-        </div>
-
-        <!-- Comparison -->
-        <div class="section">
-            <h2>🆚 Comparison with <code>gh</code> CLI</h2>
-            <table class="compare-table">
-                <tr><th>Feature</th><th>Gitzen v4.0</th><th>gh CLI</th></tr>
-                <tr><td>One-command deploy</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>Backup all repos</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>Undo (commit/file/hard)</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>Squash, Rebase, Cherry-pick, Bisect, Reflog</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>Auto-sync (daemon)</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>Contribution stats</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>SSH key generator</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>Bilingual (EN/ID)</td><td class="check">✅</td><td class="cross">❌</td></tr>
-                <tr><td>Gist / Issue / PR / Release / Actions</td><td class="check">✅</td><td class="check">✅</td></tr>
-                <tr><td>Repo create / Clone</td><td class="check">✅</td><td class="check">✅</td></tr>
-            </table>
-            <p style="margin-top:10px;color:#888;"><strong>Total: 35+ features</strong> — Gitzen is more powerful than gh CLI while staying lightweight.</p>
-        </div>
-
-        <!-- Language -->
-        <div class="section">
-            <h2>🌐 Language / Bahasa</h2>
-            <p>Gitzen speaks English by default. To switch to <strong>Indonesian</strong>, set the environment variable:</p>
-            <pre><code>export GITZEN_LANG=id</code></pre>
-            <p>Add that line to your <code>~/.bashrc</code> to make it permanent.</p>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>📄 MIT © 2026 <a href="https://github.com/Ziferd" target="_blank">Ziferd</a></p>
-            <p>"Good tools make good developers. Build them, share them, improve them."</p>
-        </div>
-
     </div>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="feature-card">
+            <div class="icon">🚀</div>
+            <h3>One-Command Deploy</h3>
+            <p>Stage, commit, pull rebase, dan push dalam satu baris perintah.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">💾</div>
+            <h3>Backup Semua Repo</h3>
+            <p>Cadangkan seluruh repositori GitHub kamu ke folder lokal dengan satu perintah.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">⏪</div>
+            <h3>Undo Apapun</h3>
+            <p>Batalkan commit, pulihkan file, atau reset total dengan aman.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔄</div>
+            <h3>Daemon Auto-Sync</h3>
+            <p>Jalankan sinkronisasi otomatis setiap N detik untuk kolaborasi real-time.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📊</div>
+            <h3>Statistik Kontribusi</h3>
+            <p>Lihat total commit, baris kode, dan bahasa dominan langsung dari terminal.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🌐</div>
+            <h3>Bilingual (EN/ID)</h3>
+            <p>Dukung Bahasa Indonesia dan Inggris. Ganti dengan <code>export GITZEN_LANG=id</code>.</p>
+        </div>
+    </section>
+
+    <!-- Quick Install -->
+    <section id="install" class="install-section">
+        <h2>⚡ Quick Install</h2>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+            curl -sL https://raw.githubusercontent.com/Ziferd/Gitzen/main/Gitzen.sh -o $PREFIX/bin/gitzen && chmod +x $PREFIX/bin/gitzen && gitzen setup
+        </div>
+        <p style="margin-top:12px;color:var(--text-secondary);font-size:0.85em;">
+            Lalu ketik <code style="color:var(--accent);">gitzen help</code> untuk melihat semua perintah.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            Dibuat oleh <a href="https://github.com/Ziferd" target="_blank">Ziferd</a> •
+            Lisensi <a href="https://github.com/Ziferd/Gitzen/blob/main/LICENSE" target="_blank">MIT</a> •
+            <a href="https://github.com/Ziferd/Gitzen" target="_blank">GitHub</a>
+        </p>
+        <p style="margin-top:6px;">© 2026 Gitzen. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function copyToClipboard(btn) {
+            const codeBlock = btn.parentElement;
+            const text = codeBlock.innerText.replace('Copy', '').trim();
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
 </body>
     </html>
