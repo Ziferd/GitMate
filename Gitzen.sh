@@ -533,7 +533,7 @@ cmd_help() {
         echo "╚═══════════【★】"
         echo ""
         echo "╔═══════════【★】「 TIPS 」【★】"
-        echo "║ • export GITZEN_LANG=en for English"
+        echo "║ • export GITZEN_LANG=id for Indonesia"
         echo "║ • export WEBHOOK_URL=\"https://...\" for notifications"
         echo "╚═══════════【★】"
     fi
