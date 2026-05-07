@@ -546,8 +546,12 @@ cmd_keygen() {
 cmd_config() {
     case "${1:-show}" in
         show)   git config --list ;;
-        set)    [ -z "$2" ] || [ -z "$3" ] && { fail "Usage: gitmate config set <key> <value>"; return 1; }
-                git config --global "$2" "$3" && ok "$2 $T_CONFIG_SET" ;;
+        set)    if [ $# -lt 2 ]; then
+            fail "Usage: gitmate config set <key> <value>"
+            return 1
+        fi
+        git config --global "$1" "$2" && ok "$1 $T_CONFIG_SET"
+        ;;
         remote) [ -z "$2" ] && { fail "Usage: gitmate config remote <url>"; return 1; }
                 git remote add origin "$2" 2>/dev/null || git remote set-url origin "$2"
                 ok "$T_CONFIG_REMOTE_OK" ;;
