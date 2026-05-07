@@ -1,4 +1,4 @@
-# 🛠️ GitMate v4.0 Github CLI For Termux
+# 🛠️ GitMate v4.0 Github CLI Assistant For Termux
 
 > A powerful, bilingual GitHub CLI assistant built for Termux — and any Linux environment.
 
