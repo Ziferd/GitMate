@@ -38,6 +38,13 @@ gitzen setup
 🎉 Done. Type `gitzen help` to see all available commands.
 
 ---
+## SUPPORTED PLATFORMS
+- Termux(Android) ✅Full Support
+- Linux(Ubuntu,Debian,Arc,Fedora) ✅Full Suport
+- macOS ✅Full Support
+- Windows (Git Bash / MSYS2 / Cygwin) ⚠️ Partial
+
+---
 
 ## 📋 Features Overview
 
