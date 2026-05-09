@@ -5,10 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gitzen v4.0 — GitHub CLI Assistant</title>
+<title>Gitzen v5.5.1 — GitHub CLI Assistant</title>
 
 <!-- PRIMARY META -->
-<meta name="title" content="Gitzen v4.0 — GitHub CLI Assistant">
+<meta name="title" content="Gitzen v5.5.1 — GitHub CLI Assistant">
 <meta name="description"
 content="Powerful GitHub CLI Assistant for Termux &amp; Linux — 35+ Git &amp; GitHub operations in one modern CLI">
 
@@ -17,7 +17,7 @@ content="Powerful GitHub CLI Assistant for Termux &amp; Linux — 35+ Git &amp; 
 <meta property="og:url" content="https://gitzen.vercel.app/">
 
 <meta property="og:title"
-content="Gitzen v4.0 — GitHub CLI Assistant for Termux">
+content="Gitzen v5.5.1 — GitHub CLI Assistant for Termux">
 
 <meta property="og:description"
 content="35+ GitHub operations in one modern CLI. Deploy, backup, and manage repos with a single command.">
@@ -44,7 +44,7 @@ content="summary_large_image">
 content="https://gitzen.vercel.app/">
 
 <meta name="twitter:title"
-content="Gitzen v4.0 — GitHub CLI Assistant">
+content="Gitzen v5.5.1 — GitHub CLI Assistant">
 
 <meta name="twitter:description"
 content="Modern GitHub CLI Assistant for Termux &amp; Linux. Deploy, backup, and manage repos with 35+ features.">
@@ -227,17 +227,9 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
         border-radius: 50%;
     }
 
-    .dot.red {
-        background: #f85149;
-    }
-
-    .dot.yellow {
-        background: #d2991d;
-    }
-
-    .dot.green {
-        background: #3fb950;
-    }
+    .dot.red   { background: #f85149; }
+    .dot.yellow{ background: #d2991d; }
+    .dot.green { background: #3fb950; }
 
     .terminal-preview .body {
         padding: 16px 20px;
@@ -248,23 +240,43 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
         color: #c9d1d9;
     }
 
-    .terminal-preview .body .prompt {
-        color: var(--accent-green);
-    }
-
-    .terminal-preview .body .cmd {
-        color: var(--accent);
-    }
-
-    .terminal-preview .body .arg {
-        color: var(--accent-orange);
-    }
+    .terminal-preview .body .prompt { color: var(--accent-green); }
+    .terminal-preview .body .cmd    { color: var(--accent); }
+    .terminal-preview .body .arg    { color: var(--accent-orange); }
 
     .terminal-preview .body .output {
         color: var(--text-secondary);
         margin-top: 8px;
         padding-left: 12px;
         border-left: 2px solid var(--border);
+    }
+
+    /* ── Badge strip ─────────────────────── */
+    .badge-strip {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0 24px 40px;
+    }
+
+    .badge {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 5px 14px;
+        font-size: 0.78em;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .badge .dot-live {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent-green);
     }
 
     /* ── Features Grid ───────────────────── */
@@ -303,6 +315,50 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
         font-size: 0.85em;
         color: var(--text-secondary);
     }
+
+    /* ── Changelog ───────────────────── */
+    .changelog-section {
+        max-width: 720px;
+        margin: 0 auto 50px;
+        padding: 0 24px;
+    }
+
+    .changelog-section h2 {
+        font-size: 1.5em;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    .changelog-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .changelog-list li {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 0.87em;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .changelog-list .tag {
+        font-size: 0.75em;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        margin-top: 1px;
+    }
+
+    .tag-fix   { background: #1f3b2a; color: #3fb950; }
+    .tag-new   { background: #1a2f4a; color: #58a6ff; }
+    .tag-improved { background: #2d2415; color: #d2991d; }
 
     /* ── Quick Install ───────────────────── */
     .install-section {
@@ -369,14 +425,8 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
 
     /* ── Responsive ───────────────────── */
     @media (max-width: 600px) {
-        .hero h1 {
-            font-size: 1.8em;
-        }
-
-        .terminal-preview .body {
-            font-size: 0.7em;
-            padding: 12px 14px;
-        }
+        .hero h1 { font-size: 1.8em; }
+        .terminal-preview .body { font-size: 0.7em; padding: 12px 14px; }
     }
 </style>
 </head>
@@ -385,7 +435,7 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
     <!-- Header -->
     <header class="header">
         <div class="logo">
-            ⎔ Gitzen <span>v4.0</span>
+            ⎔ Gitzen <span>v5.5.1</span>
         </div>
         <nav class="links">
             <a href="https://github.com/Ziferd/Gitzen" target="_blank">GitHub</a>
@@ -399,12 +449,21 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
         <h1>
             <span class="git">Git</span><span class="zen">zen</span>
         </h1>
-        <p class="tagline">GitHub CLI Assistant untuk Termux — deploy, backup, kelola repo dalam satu perintah.</p>
+        <p class="tagline">GitHub CLI Assistant untuk Termux & Linux — deploy, backup, kelola repo dalam satu perintah.</p>
         <div class="cta">
             <a href="#install" class="btn btn-primary">⬇ Quick Install</a>
             <a href="https://github.com/Ziferd/Gitzen" target="_blank" class="btn btn-secondary">Lihat di GitHub</a>
         </div>
     </section>
+
+    <!-- Badge strip -->
+    <div class="badge-strip">
+        <div class="badge"><span class="dot-live"></span> v5.5.1 Stable</div>
+        <div class="badge">🔒 Input Validation</div>
+        <div class="badge">🌐 Bilingual EN/ID</div>
+        <div class="badge">📦 35+ Features</div>
+        <div class="badge">🐧 Linux · macOS · Termux</div>
+    </div>
 
     <!-- Terminal Preview -->
     <div class="terminal-preview">
@@ -433,7 +492,7 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
             <br>
             <span class="prompt">~ $</span> <span class="cmd">gitzen</span> <span class="arg">help</span><br>
             <div class="output">
-                Gitzen v4.0 — GitHub CLI Assistant for Termux<br>
+                Gitzen v5.5.1 — GitHub CLI Assistant<br>
                 Developer By: Ziferd<br>
                 &nbsp;<br>
                 Perintah Dasar:<br>
@@ -455,28 +514,59 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
         <div class="feature-card">
             <div class="icon">💾</div>
             <h3>Backup Semua Repo</h3>
-            <p>Cadangkan seluruh repositori GitHub kamu ke folder lokal dengan satu perintah.</p>
+            <p>Cadangkan seluruh repositori GitHub kamu ke folder lokal secara paralel.</p>
         </div>
         <div class="feature-card">
             <div class="icon">⏪</div>
             <h3>Undo Apapun</h3>
-            <p>Batalkan commit, pulihkan file, atau reset total dengan aman.</p>
+            <p>Batalkan commit, pulihkan file, atau reset total dengan konfirmasi aman.</p>
         </div>
         <div class="feature-card">
             <div class="icon">🔄</div>
             <h3>Daemon Auto-Sync</h3>
-            <p>Jalankan sinkronisasi otomatis setiap N detik untuk kolaborasi real-time.</p>
+            <p>Sinkronisasi otomatis setiap N detik dengan PID lockfile agar tidak dobel.</p>
         </div>
         <div class="feature-card">
-            <div class="icon">📊</div>
-            <h3>Statistik Kontribusi</h3>
-            <p>Lihat total commit, baris kode, dan bahasa dominan langsung dari terminal.</p>
+            <div class="icon">🔒</div>
+            <h3>Input Validation</h3>
+            <p>Karakter berbahaya diblokir di semua command. Commit message tetap fleksibel.</p>
         </div>
         <div class="feature-card">
             <div class="icon">🌐</div>
             <h3>Bilingual (EN/ID)</h3>
             <p>Dukung Bahasa Indonesia dan Inggris. Ganti dengan <code>export GITZEN_LANG=id</code>.</p>
         </div>
+    </section>
+
+    <!-- Changelog -->
+    <section class="changelog-section">
+        <h2>📋 Changelog</h2>
+        <ul class="changelog-list">
+            <li>
+                <span class="tag tag-fix">FIX</span>
+                <span>String hardcoded <code>"Commit dibatalkan"</code> dan <code>"tidak disetel"</code> di <code>cmd_sync</code> &amp; <code>cmd_status</code> diganti ke sistem bilingual <code>T_*</code>.</span>
+            </li>
+            <li>
+                <span class="tag tag-improved">IMPROVED</span>
+                <span><code>validate_arg()</code> sekarang mengizinkan karakter <code>$</code> khusus untuk commit message, agar pesan seperti <code>"fix: update $PATH"</code> tidak diblokir.</span>
+            </li>
+            <li>
+                <span class="tag tag-new">NEW</span>
+                <span>Fungsi <code>validate_arg()</code> terpusat diterapkan di seluruh command — branch, tag, remote, PR, issue, config, dan lainnya.</span>
+            </li>
+            <li>
+                <span class="tag tag-fix">FIX</span>
+                <span><code>cmd_init</code> kini menggunakan <code>git -C</code> — tidak ada lagi masalah <code>cd</code> dalam subshell.</span>
+            </li>
+            <li>
+                <span class="tag tag-fix">FIX</span>
+                <span><code>fail()</code> sekarang output ke <code>stderr</code> (<code>&gt;&amp;2</code>) agar error tidak tercampur dengan stdout.</span>
+            </li>
+            <li>
+                <span class="tag tag-improved">IMPROVED</span>
+                <span>Daemon menggunakan PID-based lockfile — mencegah instance ganda bahkan setelah crash.</span>
+            </li>
+        </ul>
     </section>
 
     <!-- Quick Install -->
@@ -512,4 +602,4 @@ href="https://raw.githubusercontent.com/Ziferd/Gitzen/main/thumb/icon.png">
         }
     </script>
 </body>
-    </html>
+</html>
