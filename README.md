@@ -1,4 +1,4 @@
-# 🛠️ Gitzen v4.0 Github CLI Assistant For Termux
+# 🛠️ Gitzen v5.5.1 — GitHub CLI Assistant
 
 > A powerful, bilingual GitHub CLI assistant built for Termux — and any Linux environment.
 
@@ -8,7 +8,7 @@
 
 Gitzen combines 35+ Git and GitHub operations into a single, easy-to-remember CLI.  
 No more typing long git commands or switching between git and gh.  
-Just `gitzen deploy "fix: login bug"` and you're done. Humanity really looked at hundreds of Git commands and decided “this is fine.” Incredible species.
+Just `gitzen deploy "fix: login bug"` and you're done. Humanity really looked at hundreds of Git commands and decided "this is fine." Incredible species.
 
 - 🚀 One-command deploy — stage, commit, push, and sync in a single step.
 - 💾 Backup all your repos — store local copies without opening a browser.
@@ -17,6 +17,7 @@ Just `gitzen deploy "fix: login bug"` and you're done. Humanity really looked at
 - 📊 Stats — see your commit history, lines of code, and top languages.
 - 🧩 Full GitHub API support — manage gists, issues, PRs, releases, and actions.
 - 🌐 Bilingual — English by default, Indonesian with `GITZEN_LANG=id`.
+- 🔒 Input validation — dangerous characters are blocked on all commands.
 
 ---
 
@@ -60,6 +61,7 @@ gitzen setup
 
 ### Rewrite History
 - reset (soft/hard)
+- reflog
 - squash
 - rebase
 - cherry-pick
@@ -94,34 +96,34 @@ gitzen setup
 ## Core Git
 
 - `gitzen deploy "message" [branch]`  
-  Stage, commit, pull --rebase, then push.  
+  Stage all files, commit, pull --rebase, then push.  
   Example:
   ```bash
-  gitzen deploy "fix: login error" main
+  gitzen deploy "fix: login error"
   ```
 
 - `gitzen push [branch]`  
-  Push current branch.  
+  Push current branch to remote.  
   Example:
   ```bash
   gitzen push feature/login
   ```
 
 - `gitzen pull [branch]`  
-  Pull from remote.  
+  Pull latest changes from remote.  
   Example:
   ```bash
   gitzen pull main
   ```
 
 - `gitzen sync [branch]`  
-  Pull then push.
+  Pull then commit any local changes and push.
 
 - `gitzen status`  
-  Show working tree status.
+  Show working tree status, current branch, and remote URL.
 
 - `gitzen log`  
-  Show commit history graph.
+  Show last 20 commits as a graph.
 
 - `gitzen diff [target]`  
   Show changes between commits.  
@@ -152,7 +154,7 @@ gitzen setup
   ```
 
 - `gitzen init [project]`  
-  Create a new Git repo from scratch.  
+  Create a new Git repo with README and .gitignore from scratch.  
   Example:
   ```bash
   gitzen init my-awesome-project
@@ -163,17 +165,17 @@ gitzen setup
 ## Branch & Merge
 
 - `gitzen branch list`  
-  List all branches.
+  List all local and remote branches.
 
 - `gitzen branch create <name>`  
-  Create and switch to new branch.  
+  Create and switch to a new branch.  
   Example:
   ```bash
   gitzen branch create feat/oauth
   ```
 
 - `gitzen branch switch <name>`  
-  Switch to existing branch.
+  Switch to an existing branch.
 
 - `gitzen branch delete <name>`  
   Delete a branch.
@@ -192,19 +194,19 @@ gitzen setup
 ## Rewrite History
 
 - `gitzen reset soft|hard [target]`  
-  Reset HEAD to a specific commit.
+  Reset HEAD to a specific commit. Hard reset requires confirmation.
 
 - `gitzen reflog`  
-  Show HEAD reference log.
+  Show last 20 HEAD reference logs. Great for recovering lost commits.
 
 - `gitzen squash [count]`  
-  Squash last N commits into one.
+  Squash last N commits into one. Validates that N doesn't exceed total commits.
 
 - `gitzen rebase [branch]`  
-  Rebase current onto another branch.
+  Rebase current branch onto another.
 
 - `gitzen cherry-pick <commit>`  
-  Apply a specific commit.
+  Apply a specific commit to current branch.
 
 - `gitzen bisect start|good|bad|reset`  
   Binary search for a buggy commit. Tiny archaeological dig through your own mistakes. A timeless Git tradition.
@@ -213,8 +215,8 @@ gitzen setup
 
 ## GitHub API
 
-- `gitzen repo <name> [visibility]`  
-  Create a new GitHub repo.
+- `gitzen repo <name> [public|private]`  
+  Create a new GitHub repo and clone it locally.
 
 - `gitzen clone <user/repo>`  
   Clone a GitHub repo.
@@ -232,42 +234,50 @@ gitzen setup
   Manage Releases.
 
 - `gitzen actions list|watch|trigger`  
-  Manage GitHub Actions.
+  Manage GitHub Actions workflows.
 
 ---
 
 ## Automation
 
 - `gitzen backup [folder]`  
-  Backup all your GitHub repos.
+  Backup all your GitHub repos locally. Runs in parallel for speed. Default folder: `~/gitzen-backups`.
 
 - `gitzen stats`  
-  Show contribution statistics.
+  Show contribution stats: top committers, total lines of code, dominant languages.
 
 - `gitzen daemon [seconds]`  
-  Auto-sync repo every N seconds.
+  Auto-sync repo every N seconds in the background. Uses a PID-based lockfile to prevent duplicate instances. Default: 600 seconds.
 
 - `gitzen webhook`  
-  Test your webhook URL.
+  Send a test ping to your `WEBHOOK_URL`.
 
 ---
 
 ## Setup & Config
 
 - `gitzen setup`  
-  Install all dependencies.
+  Auto-detect package manager and install all dependencies (git, gh, jq, curl, openssh). Also runs `gh auth login` if not authenticated.
 
 - `gitzen config show|set|remote`  
-  Configure git settings.
+  View or modify git config settings.  
+  Example:
+  ```bash
+  gitzen config set user.email you@example.com
+  gitzen config remote https://github.com/you/repo.git
+  ```
 
 - `gitzen undo commit|file|hard`  
-  Undo changes.
+  Undo changes safely.
+  - `commit` — soft reset, keeps files staged
+  - `file <name>` — restore a single file
+  - `hard` — discard all changes (requires confirmation)
 
 - `gitzen keygen [email]`  
-  Generate SSH key for GitHub.
+  Generate a new ED25519 SSH key for GitHub. Saves to `~/.ssh/id_ed25519_gitzen` and prints the public key.
 
 - `gitzen help`  
-  Show full command list.
+  Show the full command reference in your terminal.
 
 ---
 
@@ -286,9 +296,11 @@ Add that line to your `~/.bashrc` to make it permanent. Because typing the same 
 
 ## ⚙️ Configuration
 
-- `GITZEN_LANG` — Language (`en` or `id`). Default: `en`
-- `WEBHOOK_URL` — Webhook URL for notifications (Slack, Discord, etc.)
-- `GITHUB_USER` — Your GitHub username (speeds up clone)
+| Variable | Description | Default |
+|---|---|---|
+| `GITZEN_LANG` | Language (`en` or `id`) | `en` |
+| `WEBHOOK_URL` | Webhook URL for notifications (Slack, Discord, etc.) | — |
+| `GITHUB_USER` | Your GitHub username (speeds up clone) | — |
 
 ---
 
@@ -304,32 +316,42 @@ Add that line to your `~/.bashrc` to make it permanent. Because typing the same 
 | Contribution stats | ✅ | ❌ |
 | SSH key generator | ✅ | ❌ |
 | Bilingual (EN/ID) | ✅ | ❌ |
+| Input validation & sanitization | ✅ | ❌ |
 | Gist / Issue / PR / Release / Actions | ✅ | ✅ |
 | Repo create / Clone | ✅ | ✅ |
 
-**Total:** 35+ features — Gitzen is more powerful than `gh CLI` while staying lightweight.
+**Total:** 35+ features — more powerful than `gh CLI` while staying lightweight.
 
 ---
 
 ## 🛠️ Troubleshooting
 
-- `"command not found"` after install  
+- **`"command not found"` after install**  
   Make sure `$PREFIX/bin` is in your `PATH`. Run `hash -r` or restart Termux.
 
-- `"gh: command not found"`  
+- **`"gh: command not found"`**  
   Run:
   ```bash
   gitzen setup
   ```
 
-- `"Not a Git repository"`  
+- **`"Not a Git repository"`**  
   You're not inside a Git repo. Navigate to one, or run:
   ```bash
   gitzen init
   ```
 
-- Deploy fails with merge conflicts  
+- **Deploy fails with merge conflicts**  
   Gitzen won't force push. Resolve conflicts manually, then run deploy again. Because Git believes suffering builds wisdom.
+
+- **`"Karakter berbahaya terdeteksi"` / `"Dangerous character detected"`**  
+  Your input contains characters like `;`, `&`, `|`, or `$` (except in commit messages). Clean the input and try again.
+
+- **Daemon won't start**  
+  A previous daemon may still be running. Check with `cat /tmp/gitzen.lock` to see the PID, or delete the lockfile manually:
+  ```bash
+  rm /tmp/gitzen.lock
+  ```
 
 ---
 
