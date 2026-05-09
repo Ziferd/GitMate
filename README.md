@@ -20,7 +20,13 @@ Just `gitzen deploy "fix: login bug"` and you're done. Humanity really looked at
 - 🔒 Input validation — dangerous characters are blocked on all commands.
 
 ---
+## SUPPORTED PLATFORMS
+- Termux(Android) ✅Full Support
+- Linux(Ubuntu,Debian,Arc,Fedora) ✅Full Suport
+- macOS ✅Full Support
+- Windows (Git Bash / MSYS2 / Cygwin) ⚠️ Partial
 
+---
 ## ⚡ Quick Install
 
 One command, and you're ready to go:
@@ -36,13 +42,6 @@ gitzen setup
 ```
 
 🎉 Done. Type `gitzen help` to see all available commands.
-
----
-## SUPPORTED PLATFORMS
-- Termux(Android) ✅Full Support
-- Linux(Ubuntu,Debian,Arc,Fedora) ✅Full Suport
-- macOS ✅Full Support
-- Windows (Git Bash / MSYS2 / Cygwin) ⚠️ Partial
 
 ---
 
