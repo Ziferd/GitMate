@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gitzen-github-cli.vercel.app/sitemap.xml
